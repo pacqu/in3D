@@ -4,7 +4,20 @@ import math
 
 
 def add_box( points, x, y, z, width, height, depth ):
-    return 0
+    x0 = x;
+    y0 = y;
+    z0 = z;
+    
+    add_point(points, x0, y0, z0)
+    add_point(points, x0, y0 + height, z0)
+    add_point(points, x0 + width, y0 + height, z0)
+    add_point(points, x0 + width, y0, z0)
+    
+    add_point(points, x0, y0, z0 + depth)
+    add_point(points, x0, y0 + height, z0 + depth)
+    add_point(points, x0 + width, y0 + height, z0 + depth)
+    add_point(points, x0 + width, y0, z0 + depth)
+    
 
 def add_sphere( points, cx, cy, cz, r, step ):
     return 0
