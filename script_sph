@@ -1,0 +1,12 @@
+#clear the edge matrix, test the sphere
+sphere
+200 200 50
+#rotate 90 degrees about y to check lines
+ident
+yrotate
+90
+translate
+100 100 0
+apply
+display
+quit

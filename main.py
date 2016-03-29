@@ -5,7 +5,7 @@ from matrix import *
 import sys
 
 screen = new_screen()
-color = [ 0, 255, 0 ]
+color = [ 255, 50, 50 ]
 edges = []
 transform = new_matrix()
 

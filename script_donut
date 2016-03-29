@@ -1,0 +1,10 @@
+torus
+100 100 25 150
+#rotate 90 degrees about y to check lines
+xrotate
+90
+translate
+50 50 0
+apply
+display
+quit

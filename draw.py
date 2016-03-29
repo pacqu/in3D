@@ -8,29 +8,58 @@ def add_box( points, x, y, z, width, height, depth ):
     y0 = y;
     z0 = z;
     
-    add_point(points, x0, y0, z0)
-    add_point(points, x0, y0 + height, z0)
-    add_point(points, x0 + width, y0 + height, z0)
-    add_point(points, x0 + width, y0, z0)
+    add_edge(points, x0, y0, z0, x0, y0 + height, z0)
+    add_edge(points, x0, y0 + height, z0, x0 + width, y0 + height, z0)
+    add_edge(points, x0 + width, y0 + height, z0, x0 + width, y0, z0)
+    add_edge(points, x0 + width, y0, z0, x0, y0, z0)
     
-    add_point(points, x0, y0, z0 + depth)
-    add_point(points, x0, y0 + height, z0 + depth)
-    add_point(points, x0 + width, y0 + height, z0 + depth)
-    add_point(points, x0 + width, y0, z0 + depth)
+    add_edge(points, x0, y0, z0 + depth, x0, y0 + height, z0 + depth)
+    add_edge(points, x0, y0 + height, z0 + depth, x0 + width, y0 + height, z0 + depth)
+    add_edge(points, x0 + width, y0 + height, z0 + depth, x0 + width, y0, z0 + depth)
+    add_edge(points, x0 + width, y0, z0 + depth, x0, y0, z0 + depth)
     
+    add_edge(points, x0, y0, z0, x0, y0, z0 + depth)
+    add_edge(points, x0, y0 + height, z0, x0,  y0 + height, z0 + depth)
+    add_edge(points, x0 + width, y0 + height, z0, x0 + width, y0 + height, z0 + depth)
+    add_edge(points, x0 + width, y0, z0, x0 + width, y0, z0 + depth)
 
 def add_sphere( points, cx, cy, cz, r, step ):
-    return 0
+    sph_mat = []
+    generate_sphere(sph_mat, cx, cy, cz, r, step)
+    for i in range( len(sph_mat) ):
+        points.append( sph_mat[i] )
 
 def generate_sphere( points, cx, cy, cz, r, step ):
-    return 0
+    p = 0
+    while (p <= 1):
+        t = 0
+        while (t <= 1):
+            x = ( r * math.cos(math.pi * t) ) + cx
+            y = ( r * math.sin(math.pi * t) * math.cos(2 * math.pi * p) ) + cy
+            z = ( r * math.sin(math.pi * t) * math.sin(2 * math.pi * p) ) + cz
+            add_point(points, x, y, z)
+            add_point(points, x, y, z)
+            t = t + step
+        p = p + step
 
 def add_torus( points, cx, cy, cz, r0, r1, step ):
-    return 0
+    tor_mat = []
+    generate_torus(tor_mat, cx, cy, cz, r0, r1, step)
+    for i in range( len(tor_mat) ):
+        points.append( tor_mat[i] )
 
 def generate_torus( points, cx, cy, cz, r0, r1, step ):
-    return 0
-
+    p = 0
+    while (p <= 1):
+        t = 0
+        while (t <= 1):
+            x = r0 * math.cos(2 * math.pi * t) + cx 
+            y = ( math.cos(2 * math.pi * p) * ( (r0 * math.sin(2 * math.pi * t)) + r1 ) ) + cy
+            z = ( math.sin(2 * math.pi * p) * ( (r0 * math.sin(2 * math.pi * t)) + r1) ) + cz
+            add_point(points, x, y, z)
+            add_point(points, x, y, z)
+            t = t + step
+        p = p + step
 
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx
